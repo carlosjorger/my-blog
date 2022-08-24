@@ -23,9 +23,9 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/blog.ico",
-              "src/blog-image.svg",
+              "src/image/favicon.ico",
+              "src/image/blog.ico",
+              "src/image/blog-image.svg",
               "src/assets"
             ],
             "styles": [
@@ -92,9 +92,9 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/favicon.ico",
-              "src/blog.ico",
-              "src/blog-image.svg",
+              "src/image/favicon.ico",
+              "src/image/blog.ico",
+              "src/image/blog-image.svg",
               "src/assets"
             ],
             "styles": [
