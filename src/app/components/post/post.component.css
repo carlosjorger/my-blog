@@ -12,3 +12,7 @@
     line-height: 24px;
     display: inline-block;
 }
+.date-footer{
+    position: relative;
+    float: right;
+}

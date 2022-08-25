@@ -20,6 +20,10 @@ export class InMemoryDataService  implements InMemoryDbService {
       publishDate: '2022-08-01', excert: 'This is a summary of the content' }
       ,{ id: 4, title: 'First Blog', author: 'AD', image: 'the-powerful-pickle-rick-photo.jpg', 
       publishDate: '2022-08-01', excert: 'This is a summary of the content' }
+      ,{ id: 5, title: 'First Blog', author: 'AD', image: 'the-powerful-pickle-rick-photo.jpg', 
+      publishDate: '2022-08-01', excert: 'This is a summary of the content' }
+      ,{ id: 6, title: 'First Blog', author: 'AD', image: 'the-powerful-pickle-rick-photo.jpg', 
+      publishDate: '2022-08-01', excert: 'This is a summary of the content' }
     ];
     return {
       users:users,
