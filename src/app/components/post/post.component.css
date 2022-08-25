@@ -4,6 +4,7 @@
     border-radius: 4px;
     border: 1px solid #eee;
     background-color: #fafafa;
+    width: 20vw;
     /* display: flex; */
     flex-direction: row;
     justify-content: center;
