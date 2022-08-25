@@ -26,9 +26,11 @@
               "src/image/favicon.ico",
               "src/image/blog.ico",
               "src/image/blog-image.svg",
+              "src/image/the-powerful-pickle-rick-photo.jpg",
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -95,9 +97,11 @@
               "src/image/favicon.ico",
               "src/image/blog.ico",
               "src/image/blog-image.svg",
+              "src/image/the-powerful-pickle-rick-photo.jpg",
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []

@@ -9,11 +9,6 @@ import { PostService } from './services/post-service.service';
 })
 export class AppComponent {
   title = 'myBlog';
-  posts:Post[]=[];
-  constructor(private postService: PostService){
-    this.postService.getPosts().subscribe(posts=>{
-      this.posts=posts;
-      console.log(posts);
-    })
-  }
+  
+  
 }

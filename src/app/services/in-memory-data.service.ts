@@ -12,9 +12,13 @@ export class InMemoryDataService  implements InMemoryDbService {
       { id: 2, firstName: 'Marlon', lastMame: 'Nomelose', email: 'marlito@gmail.com', password: '1234' }
     ];
     const posts = [
-      { id: 1, title: 'First Blog', author: 'AD', image: 'the-powerful-pickle-rick-photo', 
+      { id: 1, title: 'First Blog', author: 'AD', image: 'the-powerful-pickle-rick-photo.jpg', 
       publishDate: '2022-08-01', excert: 'This is a summary of the content' }
-      ,{ id: 2, title: 'First Blog', author: 'AD', image: 'the-powerful-pickle-rick-photo', 
+      ,{ id: 2, title: 'First Blog', author: 'AD', image: 'the-powerful-pickle-rick-photo.jpg', 
+      publishDate: '2022-08-01', excert: 'This is a summary of the content' }
+      ,{ id: 3, title: 'First Blog', author: 'AD', image: 'the-powerful-pickle-rick-photo.jpg', 
+      publishDate: '2022-08-01', excert: 'This is a summary of the content' }
+      ,{ id: 4, title: 'First Blog', author: 'AD', image: 'the-powerful-pickle-rick-photo.jpg', 
       publishDate: '2022-08-01', excert: 'This is a summary of the content' }
     ];
     return {
