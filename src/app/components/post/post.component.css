@@ -12,6 +12,20 @@
     transition: all 0.2s ease-in-out;
     line-height: 24px;
     display: inline-block;
+    flex-shrink: 0;
+    transform: perspective(500px) rotateY(25deg);
+    animation: post 2s;
+}
+@keyframes post {
+
+    0% {
+        transform:  perspective(500px) rotateY(0deg);
+
+    }
+
+    100% {
+        transform: perspective(500px) rotateY(25deg);
+    }
 }
 .date-footer{
     position: relative;

@@ -71,5 +71,7 @@
     overflow: auto;
     white-space: nowrap;
     max-width: 80vw;
+    height: 70vh;
+    padding: 40px;
 }
 
