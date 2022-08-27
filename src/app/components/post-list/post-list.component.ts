@@ -9,6 +9,13 @@ import { PostService } from 'src/app/services/post-service.service';
 })
 export class PostListComponent implements OnInit {
   posts: Post[] = [];
+  public get maxScrollLeft():number{
+    return this._scrollWidth-this._clientWidth;
+  }
+  public scrollLeft:number=0;
+
+  private _scrollWidth:number=0;
+  private _clientWidth:number=0;
   constructor(private postService: PostService) {
     this.postService.getPosts().subscribe(posts => {
       this.posts = posts;
@@ -17,7 +24,12 @@ export class PostListComponent implements OnInit {
   ngOnInit(): void {
   }
   onScroll(event: Event) {
-    console.log((event.srcElement as HTMLHtmlElement).scrollLeft);
-    console.log((event.srcElement as HTMLHtmlElement).scrollWidth-(event.srcElement as HTMLHtmlElement).clientWidth)
+    this.scrollLeft=this.getHtmlElementFromEvent(event).scrollLeft;
+    this._scrollWidth=this.getHtmlElementFromEvent(event).scrollWidth;
+    this._clientWidth=this.getHtmlElementFromEvent(event).clientWidth;
+    console.log(this.scrollLeft, this.maxScrollLeft)
+  }
+  getHtmlElementFromEvent(event: Event):HTMLHtmlElement{
+    return event.srcElement as HTMLHtmlElement;
   }
 }

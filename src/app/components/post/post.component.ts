@@ -1,3 +1,4 @@
+import { AnimationBuilder } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from 'src/app/models/post';
 
@@ -9,7 +10,9 @@ import { Post } from 'src/app/models/post';
 export class PostComponent implements OnInit {
 
   @Input() post:Post | undefined;
-  constructor() { 
+  @Input() maxScrollLeft:number=0;
+  @Input() scrollLeft:number=0;
+  constructor(private _builder: AnimationBuilder) { 
 
   }
 
