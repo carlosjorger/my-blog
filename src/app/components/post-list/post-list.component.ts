@@ -16,5 +16,8 @@ export class PostListComponent implements OnInit {
   }
   ngOnInit(): void {
   }
-
+  onScroll(event: Event) {
+    console.log((event.srcElement as HTMLHtmlElement).scrollLeft);
+    console.log((event.srcElement as HTMLHtmlElement).scrollWidth-(event.srcElement as HTMLHtmlElement).clientWidth)
+  }
 }
