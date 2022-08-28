@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Post } from 'src/app/models/post';
+import { scrollProperties } from 'src/app/models/scrollProperties';
 import { PostService } from 'src/app/services/post-service.service';
+import { PostComponent } from '../post/post.component';
 
 @Component({
   selector: 'app-post-list',
@@ -9,13 +12,16 @@ import { PostService } from 'src/app/services/post-service.service';
 })
 export class PostListComponent implements OnInit {
   posts: Post[] = [];
-  public get maxScrollLeft():number{
-    return this._scrollWidth-this._clientWidth;
+  private get maxScrollLeft(): number {
+    return this._scrollWidth - this._clientWidth;
   }
-  public scrollLeft:number=0;
+  private scrollLeft: number = 0;
+  public evenSubject = new Subject<scrollProperties>();
+  private _scrollWidth: number = 0;
+  private _clientWidth: number = 0;
+  lastNavigationStartAt: number = 0;
+  scrollBufferWindow: number = 10;
 
-  private _scrollWidth:number=0;
-  private _clientWidth:number=0;
   constructor(private postService: PostService) {
     this.postService.getPosts().subscribe(posts => {
       this.posts = posts;
@@ -24,12 +30,22 @@ export class PostListComponent implements OnInit {
   ngOnInit(): void {
   }
   onScroll(event: Event) {
-    this.scrollLeft=this.getHtmlElementFromEvent(event).scrollLeft;
-    this._scrollWidth=this.getHtmlElementFromEvent(event).scrollWidth;
-    this._clientWidth=this.getHtmlElementFromEvent(event).clientWidth;
-    console.log(this.scrollLeft, this.maxScrollLeft)
+  
+    if (Date.now() - this.lastNavigationStartAt > this.scrollBufferWindow) {
+      this.scrollLeft = this.getHtmlElementFromEvent(event).scrollLeft;
+      this._scrollWidth = this.getHtmlElementFromEvent(event).scrollWidth;
+      this._clientWidth = this.getHtmlElementFromEvent(event).clientWidth;
+      this.evenSubject.next({
+        maxScrollLeft: this.maxScrollLeft,
+        scrollLeft: this.scrollLeft,
+        scrollProportion: this._clientWidth / this._scrollWidth
+      });
+      this.lastNavigationStartAt = Date.now();
+
+    }
+
   }
-  getHtmlElementFromEvent(event: Event):HTMLHtmlElement{
+  getHtmlElementFromEvent(event: Event): HTMLHtmlElement {
     return event.srcElement as HTMLHtmlElement;
   }
 }

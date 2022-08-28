@@ -1,9 +1,9 @@
 <div class="postList" (scroll)="onScroll($event)">
     <app-post 
-            [post]="post" 
-            [maxScrollLeft]="maxScrollLeft" 
-            [scrollLeft]="scrollLeft" 
-            *ngFor="let post of posts">
+            [events]="evenSubject.asObservable()"
+            [post]="post"
+            [position]="index/(posts.length-1)"
+            *ngFor="let post of posts;let index=index;">
 
     </app-post>
 </div>

@@ -5,6 +5,7 @@
     border: 1px solid #eee;
     background-color: #fafafa;
     width: 20vw;
+    height: 60vh;
     /* display: flex; */
     flex-direction: row;
     justify-content: center;
@@ -13,19 +14,11 @@
     line-height: 24px;
     display: inline-block;
     flex-shrink: 0;
-    transform: perspective(500px) rotateY(25deg);
     animation: post 2s;
 }
-@keyframes post {
-
-    0% {
-        transform:  perspective(500px) rotateY(0deg);
-
-    }
-
-    100% {
-        transform: perspective(500px) rotateY(25deg);
-    }
+.mat-card-image{
+    width: 22.7vw;
+    height: 45vh;
 }
 .date-footer{
     position: relative;
