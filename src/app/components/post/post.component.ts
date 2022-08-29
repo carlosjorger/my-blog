@@ -15,12 +15,13 @@ import { scrollProperties } from 'src/app/models/scrollProperties';
           style({
             width: '{{width}}vw',
             height: '{{height}}vh',
-            transform: 'perspective(800px) rotateY({{degre}}deg)',
+            transform: 'perspective(800px) rotateY({{degre}}deg) scale3d({{scale}},{{scale}},1)',
           }), {
           params: {
             width: 20,
             height: 60,
             degre: 180,
+            scale: 1
           }
         }),
         transition('*<=>*',
@@ -34,7 +35,8 @@ import { scrollProperties } from 'src/app/models/scrollProperties';
             params: {
               width: 20,
               height: 60,
-              degre: 20
+              degre: 20,
+              scale: 1
             }
           }
         ),
@@ -52,7 +54,7 @@ import { scrollProperties } from 'src/app/models/scrollProperties';
           }
         }),
         transition('*<=>*',
-          animate('0.1s')
+          animate('1s')
         ),
 
       ]
@@ -76,7 +78,7 @@ export class PostComponent implements OnInit {
     if (result < 0) {
       return 0;
     }
-  
+
     return result;
   }
   public get degreePosition(): number {
@@ -92,14 +94,15 @@ export class PostComponent implements OnInit {
 
   public get styleFont() {
     return {
-      fontSize: this.postWidth*0.06 * this.degreePosition
+      fontSize: this.fontSize * (this.degreePosition ** 2)
     }
   }
   public get stylePostParams() {
     return {
-      width: this.postWidth * this.degreePosition,
-      height: this.postHeight * this.degreePosition,
-      degre: this.changeDegre(this.scalePosition * 180 + 25)
+      width: this.postWidth,
+      height: this.postHeight,
+      degre: this.changeDegre(this.scalePosition * 180 + 25),
+      scale: this.degreePosition,
     };
   }
 
@@ -124,7 +127,6 @@ export class PostComponent implements OnInit {
         this.scrollPositionScale = value.scrollLeft / value.maxScrollLeft;
         this.scrollPositionScale = Math.round(this.scrollPositionScale * 8) / 8;
         this.scrollProportion = value.scrollProportion;
-        console.log(this.scrollPositionScale)
       }
     )
   }
