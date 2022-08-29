@@ -18,9 +18,9 @@
     margin: 2px;
 }
 .date-footer{
-    position: relative;
     float: right;
 }
 p{
+    font-size: 1.2vw;
     margin-bottom: 0;
 }

@@ -7,8 +7,11 @@
     </mat-card-header>
     <img mat-card-image  height="300" alt="Blog Logo" src="/image/{{post?.image}}" />
     <mat-card-content>
-        <p [ngStyle]="styleFont">{{post?.excert}}</p>
-        <p [ngStyle]="styleFont" class="date-footer">{{post?.publishDate}}</p>
+        <p >{{post?.excert}}</p>
+        <p [@changeFont]="{
+            value:scrollPositionScale,
+            params:styleFont
+        }" class="date-footer">{{post?.publishDate}}</p>
     </mat-card-content>
 
 </mat-card>
