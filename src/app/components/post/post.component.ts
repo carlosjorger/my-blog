@@ -27,7 +27,7 @@ export class PostComponent implements OnInit {
   private postWidth: number = 20;
   private postHeight: number = 60;
 
-  private imageWidth: number = 22.7;
+  private imageWidth: number = 23;
   private imageHeight: number = 45;
 
   private style(width: number, height: number): {} {
@@ -45,7 +45,11 @@ export class PostComponent implements OnInit {
     };
   }
   public get imageStyle() {
-    return this.style(this.imageWidth, this.imageHeight);
+    return {
+      width: `100%`,
+      height: `${this.imageHeight * this.degreePosition}vh`,
+
+    };
   }
 
 
