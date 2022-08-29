@@ -24,7 +24,7 @@ import { scrollProperties } from 'src/app/models/scrollProperties';
           }
         }),
         transition('*<=>*',
-          animate('0.2s'
+          animate('0.05s'
           ), {
           params: {
             width: 20,
