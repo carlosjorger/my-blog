@@ -4,7 +4,7 @@ import { Post } from 'src/app/models/post';
 import { scrollProperties } from 'src/app/models/scrollProperties';
 import { PostService } from 'src/app/services/post-service.service';
 import { PostComponent } from '../post/post.component';
-
+import * as AOS from 'aos';
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
@@ -41,7 +41,7 @@ export class PostListComponent implements OnInit {
         scrollProportion: this._clientWidth / this._scrollWidth
       });
       this.lastNavigationStartAt = Date.now();
-
+      
     }
 
   }

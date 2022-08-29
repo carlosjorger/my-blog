@@ -24,6 +24,18 @@ export class InMemoryDataService  implements InMemoryDbService {
       publishDate: '2022-08-01', excert: 'This is a summary of the content' }
       ,{ id: 6, title: 'First Blog', author: 'AD', image: 'the-powerful-pickle-rick-photo.jpg', 
       publishDate: '2022-08-01', excert: 'This is a summary of the content' }
+      ,{ id: 7, title: 'First Blog', author: 'AD', image: 'the-powerful-pickle-rick-photo.jpg', 
+      publishDate: '2022-08-01', excert: 'This is a summary of the content' }
+      ,{ id: 9, title: 'First Blog', author: 'AD', image: 'the-powerful-pickle-rick-photo.jpg', 
+      publishDate: '2022-08-01', excert: 'This is a summary of the content' }
+      ,{ id: 10, title: 'First Blog', author: 'AD', image: 'the-powerful-pickle-rick-photo.jpg', 
+      publishDate: '2022-08-01', excert: 'This is a summary of the content' }
+      ,{ id: 11, title: 'First Blog', author: 'AD', image: 'the-powerful-pickle-rick-photo.jpg', 
+      publishDate: '2022-08-01', excert: 'This is a summary of the content' }
+      ,{ id: 12, title: 'First Blog', author: 'AD', image: 'the-powerful-pickle-rick-photo.jpg', 
+      publishDate: '2022-08-01', excert: 'This is a summary of the content' }
+      ,{ id: 13, title: 'First Blog', author: 'AD', image: 'the-powerful-pickle-rick-photo.jpg', 
+      publishDate: '2022-08-01', excert: 'This is a summary of the content' }
     ];
     return {
       users:users,
