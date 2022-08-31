@@ -22,9 +22,10 @@ export class HorizontalScrollArrowsComponent implements OnInit {
   }
 
   public mousedown(displacement:number) {
+    this.panel.scrollLeft += displacement;
     this.timeoutHandler = window.setInterval(() => {
       this.panel.scrollLeft += displacement;
-    }, 100);
+    }, 10);
   }
 
 }

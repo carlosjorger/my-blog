@@ -1,5 +1,5 @@
 import { animate, animateChild, AnimationBuilder, group, query, state, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Post } from 'src/app/models/post';
 import { scrollProperties } from 'src/app/models/scrollProperties';
@@ -25,7 +25,12 @@ import { scrollProperties } from 'src/app/models/scrollProperties';
           }
         }),
         transition('*<=>*',
-        animate('0.05s')
+          animate('0.5s',
+            style({
+              width: '{{width}}vw',
+              height: '{{height}}vh',
+              transform: 'perspective(800px) rotateY({{degre}}deg) scale3d({{scale}},{{scale}},1)',
+            }))
           , {
             params: {
               width: 20,
@@ -42,7 +47,7 @@ import { scrollProperties } from 'src/app/models/scrollProperties';
 })
 export class PostComponent implements OnInit {
 
-  @Input()  post: Post | undefined;
+  @Input() post: Post | undefined;
   @Input() position: number = 0;
   @Input() events: Observable<scrollProperties> | undefined;
 
@@ -66,10 +71,7 @@ export class PostComponent implements OnInit {
   private postWidth: number = 20;
   private postHeight: number = 60;
 
-  private imageWidth: number = 23;
   private imageHeight: number = 45;
-
-  private fontSize: number = 1.2;
 
   public get stylePostParams() {
     return {
@@ -88,19 +90,28 @@ export class PostComponent implements OnInit {
     };
   }
   private eventsSubcriptions: Subscription | undefined;
-  constructor(private _builder: AnimationBuilder) {
+  constructor(private elementRef: ElementRef, private _builder: AnimationBuilder) {
 
 
   }
   changeDegre(degre: number): Number {
     return degre > 180 ? 180 : degre;
   }
+  @ViewChild("postContainer", { read: ElementRef })
+  public postContainer: ElementRef = {} as ElementRef;
   ngOnInit(): void {
     this.eventsSubcriptions = this.events?.subscribe(
       (value) => {
         this.scrollPositionScale = value.scrollLeft / value.maxScrollLeft;
-        this.scrollPositionScale = Math.round(this.scrollPositionScale * 10) / 10;
+        this.scrollPositionScale = this.scrollPositionScale;
         this.scrollProportion = value.scrollProportion;
+        let animationFactory = this._builder.build([
+          animate('0.1s', style({
+            transform: `perspective(500px) rotateY(${this.changeDegre(this.scalePosition * 130 + 25)}deg) scale3d(${this.degreePosition},${this.degreePosition},1)`,
+          }))
+        ]);
+        animationFactory.create(this.postContainer.nativeElement).play();
+
       }
     )
   }

@@ -31,7 +31,6 @@ export class PostListComponent implements OnInit {
   ngOnInit(): void {
   }
   onScroll(event: Event) {
-
     if (Date.now() - this.lastNavigationStartAt > this.scrollBufferWindow) {
       this.scrollLeft = this.getHtmlElementFromEvent(event).scrollLeft;
       this._scrollWidth = this.getHtmlElementFromEvent(event).scrollWidth;
