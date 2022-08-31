@@ -67,11 +67,38 @@
   .card.card.highlight-card span {
     margin-left: 60px;
   } */
-.postList {
-    overflow: auto;
-    white-space: nowrap;
-    max-width: 80vw;
-    height: 70vh;
-    padding: 40px;
+.postList-wrapper {
+  position: relative;
+	max-width: 80vw;
+  height: 80vh;
+	margin: 1em auto;
+	border: 1px solid black;
+	overflow-x: hidden;
+	overflow-y: hidden;
 }
 
+.postList {
+  box-sizing: border-box;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  white-space: nowrap;
+  
+  height: 80vh;
+  background: #f3f3f3;
+  padding: 40px;
+  -webkit-overflow-scrolling: touch;
+}
+.paddles {
+}
+.paddle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 3em;
+}
+.left-paddle {
+	left: 0;
+}
+.right-paddle {
+	right: 0;
+}

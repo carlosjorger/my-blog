@@ -12,6 +12,9 @@
     align-items: center;
     display: inline-block;
 }
+.post:hover{
+    transform:perspective(800px) rotateY(0deg) scale3d(1,1,1)
+}
 .mat-card-image{
     width: 100%;
     height: 75%;

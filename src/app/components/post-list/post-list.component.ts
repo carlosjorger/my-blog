@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Post } from 'src/app/models/post';
 import { scrollProperties } from 'src/app/models/scrollProperties';
@@ -21,7 +21,8 @@ export class PostListComponent implements OnInit {
   private _clientWidth: number = 0;
   lastNavigationStartAt: number = 0;
   scrollBufferWindow: number = 10;
-
+  @ViewChild('panel', { read: ElementRef }) 
+  public panel: ElementRef<any>={} as ElementRef;
   constructor(private postService: PostService) {
     this.postService.getPosts().subscribe(posts => {
       this.posts = posts;
@@ -30,7 +31,7 @@ export class PostListComponent implements OnInit {
   ngOnInit(): void {
   }
   onScroll(event: Event) {
-  
+    
     if (Date.now() - this.lastNavigationStartAt > this.scrollBufferWindow) {
       this.scrollLeft = this.getHtmlElementFromEvent(event).scrollLeft;
       this._scrollWidth = this.getHtmlElementFromEvent(event).scrollWidth;
@@ -47,5 +48,12 @@ export class PostListComponent implements OnInit {
   }
   getHtmlElementFromEvent(event: Event): HTMLHtmlElement {
     return event.srcElement as HTMLHtmlElement;
+  }
+  public onPreviousSearchPosition(): void {
+    this.panel.nativeElement.scrollLeft -= 80;
+  }
+
+  public onNextSearchPosition(): void {
+    this.panel.nativeElement.scrollLeft += 80;
   }
 }
