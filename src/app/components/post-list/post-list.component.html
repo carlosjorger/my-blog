@@ -6,10 +6,10 @@
         </app-post>
     </div>
     <div class="paddles">
-		<button (click)="onPreviousSearchPosition()" class="left-paddle paddle hidden">
+		<button  (mousedown)="mousedown(-80)" (mouseup)="mouseup()"  (mouseleave)="mouseup()" class="left-paddle paddle hidden">
 			<
 		</button>
-		<button (click)="onNextSearchPosition()"  class="right-paddle paddle">
+		<button (mousedown)="mousedown(80)" (mouseup)="mouseup()"  (mouseleave)="mouseup()"  class="right-paddle paddle">
 			>
 		</button>
 	</div>

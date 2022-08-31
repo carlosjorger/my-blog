@@ -49,10 +49,8 @@ export class PostComponent implements OnInit {
   public scrollPositionScale: number = 0;
   private scrollProportion: number = 0.75;
   public get scalePosition(): number {
-    // console.log(this.scrollProportion,this.scrollPositionScale,this.position)
     var temp = this.scrollPositionScale * (1 - this.scrollProportion);
     var result = ((this.position - temp) / this.scrollProportion);
-    // console.log(this.scrollPositionScale,this.position,result)
     if (result > 1) {
       return 1;
     }
@@ -74,7 +72,6 @@ export class PostComponent implements OnInit {
   private fontSize: number = 1.2;
 
   public get stylePostParams() {
-    console.log(this.scalePosition,this.position)
     return {
       width: this.postWidth,
       height: this.postHeight,

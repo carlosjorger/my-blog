@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Subject } from 'rxjs';
+import { delay, Subject } from 'rxjs';
 import { Post } from 'src/app/models/post';
 import { scrollProperties } from 'src/app/models/scrollProperties';
 import { PostService } from 'src/app/services/post-service.service';
@@ -21,8 +21,8 @@ export class PostListComponent implements OnInit {
   private _clientWidth: number = 0;
   lastNavigationStartAt: number = 0;
   scrollBufferWindow: number = 10;
-  @ViewChild('panel', { read: ElementRef }) 
-  public panel: ElementRef<any>={} as ElementRef;
+  @ViewChild('panel', { read: ElementRef })
+  public panel: ElementRef<any> = {} as ElementRef;
   constructor(private postService: PostService) {
     this.postService.getPosts().subscribe(posts => {
       this.posts = posts;
@@ -31,7 +31,7 @@ export class PostListComponent implements OnInit {
   ngOnInit(): void {
   }
   onScroll(event: Event) {
-    
+
     if (Date.now() - this.lastNavigationStartAt > this.scrollBufferWindow) {
       this.scrollLeft = this.getHtmlElementFromEvent(event).scrollLeft;
       this._scrollWidth = this.getHtmlElementFromEvent(event).scrollWidth;
@@ -42,16 +42,27 @@ export class PostListComponent implements OnInit {
         scrollProportion: this._clientWidth / this._scrollWidth
       });
       this.lastNavigationStartAt = Date.now();
-      
+
     }
 
   }
   getHtmlElementFromEvent(event: Event): HTMLHtmlElement {
     return event.srcElement as HTMLHtmlElement;
   }
-  public onPreviousSearchPosition(): void {
-    this.panel.nativeElement.scrollLeft -= 80;
+  timeoutHandler: number | undefined;
+  public mouseup() {
+    if (this.timeoutHandler) {
+      window.clearInterval(this.timeoutHandler);
+      this.timeoutHandler = undefined;
+    }
   }
+
+  public mousedown(displacement:number) {
+    this.timeoutHandler = window.setInterval(() => {
+      this.panel.nativeElement.scrollLeft += displacement;
+    }, 100);
+  }
+
 
   public onNextSearchPosition(): void {
     this.panel.nativeElement.scrollLeft += 80;
