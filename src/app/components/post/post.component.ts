@@ -42,7 +42,7 @@ import { scrollProperties } from 'src/app/models/scrollProperties';
 })
 export class PostComponent implements OnInit {
 
-  @Input() post: Post | undefined;
+  @Input()  post: Post | undefined;
   @Input() position: number = 0;
   @Input() events: Observable<scrollProperties> | undefined;
 

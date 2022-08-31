@@ -1,0 +1,14 @@
+.arrows {
+}
+.arrow {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 3em;
+}
+.left-arrow {
+	left: 0;
+}
+.right-arrow {
+	right: 0;
+}

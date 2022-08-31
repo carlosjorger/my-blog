@@ -10,11 +10,13 @@ import { PostListComponent } from './components/post-list/post-list.component';
 import { PostComponent } from './components/post/post.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule} from '@angular/material/card';
+import { HorizontalScrollArrowsComponent } from './components/horizontal-scroll-arrows/horizontal-scroll-arrows.component';
 @NgModule({
   declarations: [
     AppComponent,
     PostListComponent,
-    PostComponent
+    PostComponent,
+    HorizontalScrollArrowsComponent
   ],
   imports: [
     BrowserModule,

@@ -49,22 +49,4 @@ export class PostListComponent implements OnInit {
   getHtmlElementFromEvent(event: Event): HTMLHtmlElement {
     return event.srcElement as HTMLHtmlElement;
   }
-  timeoutHandler: number | undefined;
-  public mouseup() {
-    if (this.timeoutHandler) {
-      window.clearInterval(this.timeoutHandler);
-      this.timeoutHandler = undefined;
-    }
-  }
-
-  public mousedown(displacement:number) {
-    this.timeoutHandler = window.setInterval(() => {
-      this.panel.nativeElement.scrollLeft += displacement;
-    }, 100);
-  }
-
-
-  public onNextSearchPosition(): void {
-    this.panel.nativeElement.scrollLeft += 80;
-  }
 }

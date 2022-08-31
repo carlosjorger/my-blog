@@ -5,12 +5,5 @@
 
         </app-post>
     </div>
-    <div class="paddles">
-		<button  (mousedown)="mousedown(-80)" (mouseup)="mouseup()"  (mouseleave)="mouseup()" class="left-paddle paddle hidden">
-			<
-		</button>
-		<button (mousedown)="mousedown(80)" (mouseup)="mouseup()"  (mouseleave)="mouseup()"  class="right-paddle paddle">
-			>
-		</button>
-	</div>
+    <app-horizontal-scroll-arrows [panel]="panel"></app-horizontal-scroll-arrows>
 </div>
