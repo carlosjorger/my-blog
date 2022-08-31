@@ -11,11 +11,21 @@
     justify-content: center;
     align-items: center;
     display: inline-block;
+  
+
 }
 
-.post:hover {
-    transform: perspective(800px) rotateY(0deg) scale3d(1, 1, 1)
+.postContainer {
+    width: 20vw;
+    height: 60vh;
+    /* display: flex; */
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    display: inline-block;
+
 }
+
 
 .mat-card-image {
     width: 100%;

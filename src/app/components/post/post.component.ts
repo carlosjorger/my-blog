@@ -7,7 +7,7 @@ import { scrollProperties } from 'src/app/models/scrollProperties';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.css'],
+  styleUrls: ['./post.component.scss'],
   animations: [
     trigger('changeCard',
       [
@@ -25,7 +25,7 @@ import { scrollProperties } from 'src/app/models/scrollProperties';
           }
         }),
         transition('*<=>*',
-          animate('0.5s',
+          animate('0.1s',
             style({
               width: '{{width}}vw',
               height: '{{height}}vh',
@@ -107,12 +107,31 @@ export class PostComponent implements OnInit {
         this.scrollProportion = value.scrollProportion;
         let animationFactory = this._builder.build([
           animate('0.1s', style({
-            transform: `perspective(500px) rotateY(${this.changeDegre(this.scalePosition * 130 + 25)}deg) scale3d(${this.degreePosition},${this.degreePosition},1)`,
+            transform: `perspective(800px) rotateY(${this.changeDegre(this.scalePosition * 130 + 25)}deg) scale3d(${this.degreePosition},${this.degreePosition},1)`,
+
           }))
         ]);
         animationFactory.create(this.postContainer.nativeElement).play();
 
       }
     )
+  }
+  mouseOverPost() {
+    let animationFactory = this._builder.build([
+      animate('0.1s', style({
+        transform: `perspective(800px) rotateY(0deg) scale3d(1,1,1)`,
+      }))
+    ]);
+    animationFactory.create(this.postContainer.nativeElement).play();
+
+  }
+  mouseOutPost() {
+    let animationFactory = this._builder.build([
+      animate('0.1s', style({
+        transform: `perspective(800px) rotateY(${this.changeDegre(this.scalePosition * 130 + 25)}deg) scale3d(${this.degreePosition},${this.degreePosition},1)`,
+      }))
+    ]);
+    animationFactory.create(this.postContainer.nativeElement).play();
+
   }
 }

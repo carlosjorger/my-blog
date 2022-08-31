@@ -1,11 +1,13 @@
-<mat-card  #postContainer class="post">
-    <mat-card-header>
-        <mat-card-title>{{post?.title}}</mat-card-title>
-    </mat-card-header>
-    <img mat-card-image  height="300" alt="Blog Logo" src="/image/{{post?.image}}" />
-    <mat-card-content>
-        <p >{{post?.excert}}</p>
-        <p class="date-footer">{{post?.publishDate}}</p>
-    </mat-card-content>
+<div class="postContainer">
+    <mat-card  #postContainer (mouseover)="mouseOverPost()" (mouseout)="mouseOutPost()"  class="post">
+        <mat-card-header>
+            <mat-card-title>{{post?.title}}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image height="300" alt="Blog Logo" src="/image/{{post?.image}}" />
+        <mat-card-content>
+            <p>{{post?.excert}}</p>
+            <p class="date-footer">{{post?.publishDate}}</p>
+        </mat-card-content>
 
-</mat-card>
+    </mat-card>
+</div>
