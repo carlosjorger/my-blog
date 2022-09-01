@@ -12,9 +12,12 @@ export class HorizontalScrollArrowsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    // console.log(this.panel.clientWidth,this.panel.scrollWidth)
   }
   timeoutHandler: number | undefined;
   public mouseup() {
+    console.log(this.panel.clientWidth,this.panel.scrollWidth)
+    
     if (this.timeoutHandler) {
       window.clearInterval(this.timeoutHandler);
       this.timeoutHandler = undefined;

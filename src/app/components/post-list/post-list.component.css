@@ -84,6 +84,7 @@
   white-space: nowrap;
   
   height: 80vh;
+  min-width: 100vw;
   background: #f3f3f3;
   padding: 40px;
   -webkit-overflow-scrolling: touch;

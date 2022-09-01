@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { delay, Subject } from 'rxjs';
 import { Post } from 'src/app/models/post';
 import { scrollProperties } from 'src/app/models/scrollProperties';
@@ -21,29 +21,53 @@ export class PostListComponent implements OnInit {
   private _clientWidth: number = 0;
   lastNavigationStartAt: number = 0;
   scrollBufferWindow: number = 10;
-  @ViewChild('panel', { read: ElementRef })
-  public panel: ElementRef<any> = {} as ElementRef;
-  constructor(private postService: PostService) {
+  @ViewChild('panel', {static:true}) panel: ElementRef= {} as ElementRef;
+  constructor(private postService: PostService,private elementRef: ElementRef) {
     this.postService.getPosts().subscribe(posts => {
       this.posts = posts;
     })
   }
+
+  ngAfterContentInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    const element=this.panel.nativeElement as HTMLElement;
+    console.log(element)
+    // this.panel.nativeElement.scrollLeft=20;
+    console.log(this.panel.nativeElement.clientWidth,window.innerWidth)
+
+    // this.triggetScrollEvent(element);
+    
+  }
   ngOnInit(): void {
+    
+  }
+  @HostListener('document:scroll', ['$event'])
+  algo(){
+    console.log('a')
   }
   onScroll(event: Event) {
     if (Date.now() - this.lastNavigationStartAt > this.scrollBufferWindow) {
-      this.scrollLeft = this.getHtmlElementFromEvent(event).scrollLeft;
-      this._scrollWidth = this.getHtmlElementFromEvent(event).scrollWidth;
-      this._clientWidth = this.getHtmlElementFromEvent(event).clientWidth;
-      this.evenSubject.next({
-        maxScrollLeft: this.maxScrollLeft,
-        scrollLeft: this.scrollLeft,
-        scrollProportion: this._clientWidth / this._scrollWidth
-      });
+      this.triggetScrollEvent(this.getHtmlElementFromEvent(event));
       this.lastNavigationStartAt = Date.now();
 
     }
 
+  }
+  triggetScrollEvent(element:HTMLElement):void{
+    this.scrollLeft = element.scrollLeft;
+    this._scrollWidth = element.scrollWidth;
+    this._clientWidth = element.clientWidth;
+    console.log({
+      maxScrollLeft: this.maxScrollLeft,
+      scrollLeft: this.scrollLeft,
+      scrollProportion: this._clientWidth / this._scrollWidth
+    })
+    this.evenSubject.next({
+      maxScrollLeft: this.maxScrollLeft,
+      scrollLeft: this.scrollLeft,
+      scrollProportion: this._clientWidth / this._scrollWidth
+    });
   }
   getHtmlElementFromEvent(event: Event): HTMLHtmlElement {
     return event.srcElement as HTMLHtmlElement;
