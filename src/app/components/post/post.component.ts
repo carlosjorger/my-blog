@@ -3,7 +3,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Post } from 'src/app/models/post';
 import { scrollProperties } from 'src/app/models/scrollProperties';
-import {ScrollingModule} from '@angular/cdk/scrolling'; 
+import { ScrollingModule } from '@angular/cdk/scrolling';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -46,19 +46,30 @@ export class PostComponent implements OnInit {
   @ViewChild("postContainer", { read: ElementRef })
   public postContainer: ElementRef = {} as ElementRef;
   ngOnInit(): void {
-    
+
     this.eventsSubcriptions = this.events?.subscribe(
       (value) => {
         this.scrollPositionScale = value.scrollLeft / value.maxScrollLeft;
         this.scrollPositionScale = this.scrollPositionScale;
         this.scrollProportion = value.scrollProportion;
-        let animationFactory = this._builder.build([
-          animate('0.1s', style({
-            transform: `perspective(800px) rotateY(${this.degree}deg) scale3d(${this.scaleValue},${this.scaleValue},1)`,
-          }))
-        ]);
-        animationFactory.create(this.postContainer.nativeElement).play();
+        if (this.scrollPositionScale == 0) {
+          console.log(this.scrollPositionScale)
+          let animationFactory = this._builder.build([
+            animate('0.5s', style({
+              transform: `perspective(800px) rotateY(0deg) scale3d(1,1,1)`,
+            }))
+          ]);
+          animationFactory.create(this.postContainer.nativeElement).play();
 
+        }
+        else {
+          let animationFactory = this._builder.build([
+            animate('0.1s', style({
+              transform: `perspective(800px) rotateY(${this.degree}deg) scale3d(${this.scaleValue},${this.scaleValue},1)`,
+            }))
+          ]);
+          animationFactory.create(this.postContainer.nativeElement).play();
+        }
       }
     )
   }
@@ -74,12 +85,25 @@ export class PostComponent implements OnInit {
     animationFactory.create(this.postContainer.nativeElement).play();
   }
   mouseOutPost() {
-    let animationFactory = this._builder.build([
-      animate('0.5s', style({
-        transform: `perspective(800px) rotateY(${this.degree}deg) scale3d(${this.scaleValue},${this.scaleValue},1)`,
-      }))
-    ]);
-    animationFactory.create(this.postContainer.nativeElement).play();
+    if (this.scrollPositionScale <10) {
+      let animationFactory = this._builder.build([
+        animate('0.5s', style({
+          transform: `perspective(800px) rotateY(0deg) scale3d(1,1,1)`,
+        }))
+      ]);
+      animationFactory.create(this.postContainer.nativeElement).play();
+
+    }
+    else {
+      let animationFactory = this._builder.build([
+        animate('0.5s', style({
+          transform: `perspective(800px) rotateY(${this.degree}deg) scale3d(${this.scaleValue},${this.scaleValue},1)`,
+        }))
+      ]);
+      animationFactory.create(this.postContainer.nativeElement).play();
+
+    }
+
 
   }
 }

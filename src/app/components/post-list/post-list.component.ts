@@ -58,11 +58,7 @@ export class PostListComponent implements OnInit {
     this.scrollLeft = element.scrollLeft;
     this._scrollWidth = element.scrollWidth;
     this._clientWidth = element.clientWidth;
-    console.log({
-      maxScrollLeft: this.maxScrollLeft,
-      scrollLeft: this.scrollLeft,
-      scrollProportion: this._clientWidth / this._scrollWidth
-    })
+    
     this.evenSubject.next({
       maxScrollLeft: this.maxScrollLeft,
       scrollLeft: this.scrollLeft,
