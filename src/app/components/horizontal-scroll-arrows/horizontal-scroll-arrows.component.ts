@@ -16,8 +16,6 @@ export class HorizontalScrollArrowsComponent implements OnInit {
   }
   timeoutHandler: number | undefined;
   public mouseup() {
-    console.log(this.panel.clientWidth,this.panel.scrollWidth)
-    
     if (this.timeoutHandler) {
       window.clearInterval(this.timeoutHandler);
       this.timeoutHandler = undefined;

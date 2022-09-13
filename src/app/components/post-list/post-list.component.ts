@@ -32,19 +32,9 @@ export class PostListComponent implements OnInit {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
     const element=this.panel.nativeElement as HTMLElement;
-    console.log(element)
-    // this.panel.nativeElement.scrollLeft=20;
-    console.log(this.panel.nativeElement.clientWidth,window.innerWidth)
-
-    // this.triggetScrollEvent(element);
-    
   }
   ngOnInit(): void {
     
-  }
-  @HostListener('document:scroll', ['$event'])
-  algo(){
-    console.log('a')
   }
   onScroll(event: Event) {
     if (Date.now() - this.lastNavigationStartAt > this.scrollBufferWindow) {

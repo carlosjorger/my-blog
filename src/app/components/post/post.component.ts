@@ -23,13 +23,6 @@ export class PostComponent implements OnInit {
   public get positionValue(): number {
     var temp = this.scrollPositionScale * (1 - this.scrollProportion);
     var result = ((this.position - temp) / this.scrollProportion);
-    if (result > 1) {
-      return 1;
-    }
-    if (result < 0) {
-      return 0;
-    }
-
     return result;
   }
   public get scaleValue(): number {
@@ -52,24 +45,7 @@ export class PostComponent implements OnInit {
         this.scrollPositionScale = value.scrollLeft / value.maxScrollLeft;
         this.scrollPositionScale = this.scrollPositionScale;
         this.scrollProportion = value.scrollProportion;
-        if (this.scrollPositionScale == 0) {
-          console.log(this.scrollPositionScale)
-          let animationFactory = this._builder.build([
-            animate('0.5s', style({
-              transform: `perspective(800px) rotateY(0deg) scale3d(1,1,1)`,
-            }))
-          ]);
-          animationFactory.create(this.postContainer.nativeElement).play();
-
-        }
-        else {
-          let animationFactory = this._builder.build([
-            animate('0.1s', style({
-              transform: `perspective(800px) rotateY(${this.degree}deg) scale3d(${this.scaleValue},${this.scaleValue},1)`,
-            }))
-          ]);
-          animationFactory.create(this.postContainer.nativeElement).play();
-        }
+        this.doAnimationByScrollPositionScale()
       }
     )
   }
@@ -77,33 +53,24 @@ export class PostComponent implements OnInit {
     return degre > 180 ? 180 : degre;
   }
   mouseOverPost() {
-    let animationFactory = this._builder.build([
-      animate('0.1s', style({
-        transform: `perspective(800px) rotateY(0deg) scale3d(1,1,1)`,
-      }))
-    ]);
-    animationFactory.create(this.postContainer.nativeElement).play();
+    this.doAnimation(0.1, 0, 1, 1, 1);
   }
   mouseOutPost() {
-    if (this.scrollPositionScale <10) {
-      let animationFactory = this._builder.build([
-        animate('0.5s', style({
-          transform: `perspective(800px) rotateY(0deg) scale3d(1,1,1)`,
-        }))
-      ]);
-      animationFactory.create(this.postContainer.nativeElement).play();
-
+    this.doAnimationByScrollPositionScale()
+  }
+  doAnimationByScrollPositionScale(){
+    if (this.scrollPositionScale < 0.05) {
+      this.doAnimation(0.5, 0, 1, 1, 1);
     }
     else {
-      let animationFactory = this._builder.build([
-        animate('0.5s', style({
-          transform: `perspective(800px) rotateY(${this.degree}deg) scale3d(${this.scaleValue},${this.scaleValue},1)`,
-        }))
-      ]);
-      animationFactory.create(this.postContainer.nativeElement).play();
-
+      this.doAnimation(0.1, this.degree, this.scaleValue, this.scaleValue, 1);
     }
-
-
+  }
+  doAnimation(duration: number, rotateYDegree: number, scale3D1: number, scale3D2: number, scale3D3: number,): void {
+    this._builder.build([
+      animate(`${duration}s`, style({
+        transform: `perspective(800px) rotateY(${rotateYDegree}deg) scale3d(${scale3D1},${scale3D2},${scale3D3})`,
+      }))
+    ]).create(this.postContainer.nativeElement).play();
   }
 }
