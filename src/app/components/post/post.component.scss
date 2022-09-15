@@ -2,18 +2,16 @@
     margin: 8px 0 8px 0;
     padding: 8px 0 8px 0;
     border-radius: 4px;
-    border: 1px solid #eee;
+    position: relative;
+
+    // border: 1px solid #eee;
     background-color: #fafafa;
     width: 20vw;
     height: 60vh;
-    /* display: flex; */
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
     display: inline-block;
-  
-
+    box-shadow: 0px 0px 10px 5px rgb(65, 74, 82)
 }
+
 
 .postContainer {
     width: 20vw;

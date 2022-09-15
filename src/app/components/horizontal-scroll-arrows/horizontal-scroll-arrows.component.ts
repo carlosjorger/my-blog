@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-horizontal-scroll-arrows',
@@ -8,25 +9,29 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 export class HorizontalScrollArrowsComponent implements OnInit {
 
 
-  @Input() panel:HTMLDivElement={} as HTMLDivElement;
+  @Input() panel: HTMLDivElement = {} as HTMLDivElement;
   constructor() { }
 
   ngOnInit(): void {
     // console.log(this.panel.clientWidth,this.panel.scrollWidth)
   }
-  timeoutHandler: number | undefined;
+  timeoutHandler: Subscription | undefined;
   public mouseup() {
-    if (this.timeoutHandler) {
-      window.clearInterval(this.timeoutHandler);
-      this.timeoutHandler = undefined;
-    }
+    // console.log(this.timeoutHandler)
+    this.timeoutHandler?.unsubscribe();
   }
 
-  public mousedown(displacement:number) {
+  public mousedown(displacement: number) {
     this.panel.scrollLeft += displacement;
-    this.timeoutHandler = window.setInterval(() => {
-      this.panel.scrollLeft += displacement;
-    }, 10);
+    // this.timeoutHandler = window.setInterval(() => {
+    //   // console.log(this.panel.scrollLeft)
+     
+    // }, 20);
+    this.timeoutHandler=interval(15).subscribe(()=>{
+      window.requestAnimationFrame(() => {
+        this.panel.scrollLeft += displacement;
+      });
+    })
   }
 
 }

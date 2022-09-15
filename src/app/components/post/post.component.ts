@@ -18,11 +18,11 @@ export class PostComponent implements OnInit {
   @Input() position: number = 0;
   @Input() events: Observable<scrollProperties> | undefined;
 
-  public scrollPositionScale: number = 0;
+  public scrollLeftPropotion: number = 0;
   private scrollProportion: number = 0.75;
   public get positionValue(): number {
-    var temp = this.scrollPositionScale * (1 - this.scrollProportion);
-    var result = ((this.position - temp) / this.scrollProportion);
+    var windowStartPosition = this.scrollLeftPropotion * (1 - this.scrollProportion);
+    var result = ((this.position - windowStartPosition) / this.scrollProportion);
     return result;
   }
   public get scaleValue(): number {
@@ -36,16 +36,22 @@ export class PostComponent implements OnInit {
 
 
   }
+  lastNavigationStartAt: number = 0;
   @ViewChild("postContainer", { read: ElementRef })
   public postContainer: ElementRef = {} as ElementRef;
   ngOnInit(): void {
 
     this.eventsSubcriptions = this.events?.subscribe(
       (value) => {
-        this.scrollPositionScale = value.scrollLeft / value.maxScrollLeft;
-        this.scrollPositionScale = this.scrollPositionScale;
-        this.scrollProportion = value.scrollProportion;
-        this.doAnimationByScrollPositionScale()
+        if(Date.now() - this.lastNavigationStartAt > 100){
+          this.scrollLeftPropotion = value.scrollLeft / value.maxScrollLeft;
+          this.scrollProportion = value.scrollProportion;
+          this.doAnimationByScrollPositionScale()  
+          this.lastNavigationStartAt=Date.now()
+          console.log('a')
+        }
+
+        
       }
     )
   }
@@ -59,11 +65,11 @@ export class PostComponent implements OnInit {
     this.doAnimationByScrollPositionScale()
   }
   doAnimationByScrollPositionScale(){
-    if (this.scrollPositionScale < 0.05) {
-      this.doAnimation(0.5, 0, 1, 1, 1);
+    if (this.scrollLeftPropotion < 0.1) {
+      this.doAnimation(.1, 0, 1, 1, 1);
     }
     else {
-      this.doAnimation(0.1, this.degree, this.scaleValue, this.scaleValue, 1);
+      this.doAnimation(.1, this.degree, this.scaleValue, this.scaleValue, 1);
     }
   }
   doAnimation(duration: number, rotateYDegree: number, scale3D1: number, scale3D2: number, scale3D3: number,): void {
